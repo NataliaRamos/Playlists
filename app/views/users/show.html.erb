@@ -1,0 +1,23 @@
+<a href="/songs">Dashboard</a>
+<a href="/mains">Logout</a>
+
+<h1><%= @user.name %>'s Playlist</h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>Artist</td>
+      <td>Title</td>
+      <td>Times Added</td>
+    </tr>
+  </thead>
+  <tbody>
+    <%  @playlist.each do |x|%>
+    <tr>
+      <td><%= x.inspect %></td>
+      <td><%= %></td>
+      <td><%= %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

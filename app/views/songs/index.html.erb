@@ -1,0 +1,39 @@
+<a href="/mains">Logout</a>
+<h1>Hello, <%= @user.name %></h1>
+
+<h3>All the songs in our hub:</h3>
+
+<table>
+  <thead>
+    <tr>
+      <td>Artist</td>
+      <td>Title</td>
+      <td>No. of Times song has been added</td>
+      <td>Add to Playlist</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @song.each do |song| %>
+    <tr>
+      <td><%= song.artist %></td>
+      <td><a href="/songs/<%= song.id %>"><%= song.title %></a></td>
+      <td><%= song.times_added%></td>
+      <td><%= button_to "Add", {action: "create", controller: :playlists, :id => song.id}, method: :post%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Add a Song:</h3>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |errors| %>
+    <p><%= errors %></p>
+  <% end %>
+<% end %>
+<form action="/songs" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <input type="hidden" name="song[user_id]">
+  Title: <input id="title" type="text" name="song[title]"><br>
+  Artist: <input type="text" name="song[artist]"><br>
+  <input type="submit" value="Add Song">
+</form>
